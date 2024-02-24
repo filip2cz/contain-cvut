@@ -41,3 +41,17 @@ Other ad networks may try to link your Microsoft activities with your regular br
 Good news! Containers aren’t just for Microsoft. You can use Containers to prevent websites from linking your identities across the Web by installing [Firefox Multi-Account Containers](https://addons.mozilla.org/firefox/addon/multi-account-containers/).
 
 To learn more about how Mult-Account Containers work, see our support page at [Firefox Multi-Account Containers](https://addons.mozilla.org/firefox/addon/multi-account-containers/).
+
+## Building
+
+### Install web-ext
+```bash
+npm install --global web-ext
+```
+
+### Build
+```bash
+web-ext build
+```
+
+Build is now in `.\web-ext-artifacts\`
