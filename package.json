@@ -1,0 +1,19 @@
+{
+  "name": "better-contain-microsoft",
+  "version": "1.0.0",
+  "description": "Better Microsoft Container isolates your Microsoft activity from the rest of your web activity in order to prevent Microsoft from tracking you outside of the Microsoft website via third party cookies.",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filip2cz/better-contain-microsoft.git"
+  },
+  "author": "Filip Komárek",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/filip2cz/better-contain-microsoft/issues"
+  },
+  "homepage": "https://github.com/filip2cz/better-contain-microsoft#readme"
+}
