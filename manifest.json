@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Better Microsoft Container",
-    "version": "1.5.4",
+    "version": "1.0.0",
 
     "description": "Better Microsoft Container isolates your Microsoft activity from the rest of your web activity in order to prevent Microsoft from tracking you outside of the Microsoft website via third party cookies. It is fork of old outdated Microsoft Container",
 
