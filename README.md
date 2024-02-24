@@ -1,24 +1,24 @@
-# Microsoft Container
+# Better Microsoft Container
 
 **Prevent Microsoft from tracking your visits to other websites**
 
-This is a fork of [Google Container](https://github.com/containers-everywhere/contain-google), a fork of [Facebook Container](https://github.com/mozilla/contain-facebook)
+This is a fork of [Microsoft Container](https://github.com/jschenke488/contain-microsoft), a fork of [Facebook Container](https://github.com/mozilla/contain-facebook)
 
-Microsoft Container is an add-on you can install on Firefox to prevent Microsoft from tracking your activity on other websites, so you can continue to use Microsoft while protecting your privacy.
+Better Microsoft Container is an add-on you can install on Firefox to prevent Microsoft from tracking your activity on other websites, so you can continue to use Microsoft while protecting your privacy.
 
 **Note:** To learn more about Containers in general, see [Firefox Multi-Account Containers](https://support.mozilla.org/kb/containers).
 
-## How does Microsoft Container work?
+## How does Better Microsoft Container work?
 
 The Add-on keeps Microsoft in a separate Container to prevent it from following your activity on other websites. When you first install the add-on, it signs you out of Microsoft and deletes the cookies that Microsoft uses to track you on other websites. 
 
 Every time you visit Microsoft, it will open in its own container, separate from other websites you visit.  You can login to Microsoft within its container.  When browsing outside the container, Microsoft won’t be able to easily collect your browsing data and connect it to your Microsoft identity.
 
-## How do I enable Microsoft Container?
+## How do I enable Better Microsoft Container?
 
 We’ve made it easy to take steps to protect your privacy so you can go on with your day.
 
-1. [Install Microsoft Container](#). This will log you out of Microsoft and delete the cookies it’s been using to track you.
+1. [Install Better Microsoft Container](#). This will log you out of Microsoft and delete the cookies it’s been using to track you.
 2. Open Microsoft and use it like you normally would.  Firefox will automatically switch to the Microsoft Container tab for you.
 3. If you click on a link to a page outside of Microsoft or type in another website in the address bar, Firefox will load them outside of the Microsoft Container
 
