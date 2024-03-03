@@ -8,6 +8,10 @@ Better Microsoft Container is an add-on you can install on Firefox to prevent Mi
 
 **Note:** To learn more about Containers in general, see [Firefox Multi-Account Containers](https://support.mozilla.org/kb/containers).
 
+## Contribute
+Only one repo for pull requests and issues is https://git.envs.net/fkomarek/better-contain-microsoft.  
+Github one (https://github.com/filip2cz/better-contain-microsoft) is mirror and all pull requests and issues to Github will be ignored.
+
 ## How does Better Microsoft Container work?
 
 The Add-on keeps Microsoft in a separate Container to prevent it from following your activity on other websites. When you first install the add-on, it signs you out of Microsoft and deletes the cookies that Microsoft uses to track you on other websites. 
