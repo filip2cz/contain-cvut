@@ -14,7 +14,7 @@ let MICROSOFT_DOMAINS = [
 ];
 
 const GITHUB_DOMAINS = [
-    "github.com", "github.io", "githubusercontent.com", "githubstatus.com"
+  "github.blog", "github.com", "github.io", "githubnext.com", "githubusercontent.com", "githubstatus.com"
 ];
 
 MICROSOFT_DOMAINS = MICROSOFT_DOMAINS.concat(GITHUB_DOMAINS);
