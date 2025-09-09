@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "ČVUT Container",
+    "name": "CVUT Container",
     "version": "1.0.0",
 
     "description": "ČVUT Container isolates your ČVUT activity from the rest of your web activity.",
