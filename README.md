@@ -1,6 +1,6 @@
 # ČVUT Container
 
-A fork of [github.com/filip2cz/better-contain-microsoft.git](https://github.com/filip2cz/better-contain-microsoft.git), a fork of [Microsoft Container](https://github.com/jschenke488/contain-microsoft), a fork of [Facebook Container](https://github.com/mozilla/contain-facebook).
+A fork of [Better Microsoft Container](https://github.com/filip2cz/better-contain-microsoft.git), a fork of [Microsoft Container](https://github.com/jschenke488/contain-microsoft), a fork of [Facebook Container](https://github.com/mozilla/contain-facebook).
 
 **Note:** To learn more about Containers in general, see [Firefox Multi-Account Containers](https://support.mozilla.org/kb/containers).
 
