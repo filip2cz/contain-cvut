@@ -305,10 +305,6 @@ function shouldContainInto (url, tab) {
       // Should contain into ČVUT Container
       return CVUTCookieStoreId;
     }
-  } else if (tab.cookieStoreId === CVUTCookieStoreId) {
-    // Non-CVUT-URL inside CVUT Container Tab
-    // Should contain into Default Container
-    return "firefox-default";
   }
 
   return false;
