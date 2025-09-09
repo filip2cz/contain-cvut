@@ -4,7 +4,10 @@ const CVUT_CONTAINER_COLOR = "purple";
 const CVUT_CONTAINER_ICON = "fingerprint";
 
 let CVUT_DOMAINS = [
-  "hub.fel.cvut.cz", "auth.fel.cvut.cz", "kos.cvut.cz", "moodle.fel.cvut.cz", "usermap.cvut.cz"
+  "cvut.cz", "fel.cvut.cz", "hub.fel.cvut.cz", "auth.fel.cvut.cz", "kos.cvut.cz", "moodle.fel.cvut.cz", "usermap.cvut.cz",
+  "felsight.fel.cvut.cz", "cw.felk.cvut.cz", "felk.cvut.cz", "cw.fel.cvut.cz", "gitlab.fel.cvut.cz", "rally.fel.cvut.cz",
+  "intranet.fel.cvut.cz", "wimap.feld.cvut.cz", "procesy.cvut.cz", "alfred2.feld.cvut.cz", "udb.fel.cvut.cz", "helpdesk.cvut.cz",
+  "servicedesk.cvut.cz", "central.fel.cvut.cz", "list.feld.cvut.cz"
 ];
 
 const GITHUB_DOMAINS = [
