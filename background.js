@@ -1,33 +1,27 @@
 // Param values from https://developer.mozilla.org/Add-ons/WebExtensions/API/contextualIdentities/create
-const MICROSOFT_CONTAINER_NAME = "Microsoft";
-const MICROSOFT_CONTAINER_COLOR = "blue";
-const MICROSOFT_CONTAINER_ICON = "briefcase";
+const CVUT_CONTAINER_NAME = "ČVUT";
+const CVUT_CONTAINER_COLOR = "purple";
+const CVUT_CONTAINER_ICON = "fingerprint";
 
-let MICROSOFT_DOMAINS = [
-    "microsoft.com", "microsoft.org", "microsoft.net", "microsoft.co", "microsoft.co.uk", "microsoft.nl",
-  "githubapp.com", "azurewebsites.net","azure-mobile.net","cloudapp.net",
-  "microsoftproductionstudios.org", "azure.com", "windowsazure.com", "bing.com", "bing.net", "bingtoolbar.com", "outlook.com",
-  "skype.com", "hotmail.com", "live.com", "sharepoint.com", "bingtoolbar.com", "internetexplorer.com",  "onedrive.com",
-  "office.com","office365.com", "xbox.com", "visualstudio.com","microsoftvisualstudio.com",  "microsoftonline.com",
-  "Surface.com", "Zone.com", "rare.com", "Sites.com", "msdn.com", "microsoftstream.com",
-  "msn.com"
+let CVUT_DOMAINS = [
+  "hub.fel.cvut.cz", "auth.fel.cvut.cz", "kos.cvut.cz"
 ];
 
 const GITHUB_DOMAINS = [
-  "github.blog", "github.com", "github.io", "githubnext.com", "githubusercontent.com", "githubstatus.com"
+
 ];
 
-MICROSOFT_DOMAINS = MICROSOFT_DOMAINS.concat(GITHUB_DOMAINS);
+CVUT_DOMAINS = CVUT_DOMAINS.concat(GITHUB_DOMAINS);
 
 const MAC_ADDON_ID = "@testpilot-containers";
 
 let macAddonEnabled = false;
-let microsoftCookieStoreId = null;
+let CVUTCookieStoreId = null;
 let extensionSettings = {};
 
 const canceledRequests = {};
 const tabsWaitingToLoad = {};
-const microsoftHostREs = [];
+const CVUTHostREs = [];
 const githubHostREs = [];
 const whitelistedHostREs = [];
 const allowlistedHostREs = [];
@@ -126,12 +120,12 @@ function shouldCancelEarly (tab, options) {
   return false;
 }
 
-function generateMicrosoftHostREs () {
+function generateCVUTHostREs () {
   const matchOperatorsRegex = /[|\\{}()[\]^$+*?.-]/g;
 
-  for (let microsoftDomain of MICROSOFT_DOMAINS) {
-    microsoftDomain = microsoftDomain.replace(matchOperatorsRegex, '\\$&');
-    microsoftHostREs.push(new RegExp(`(^|\\.)${microsoftDomain}$`));
+  for (let CVUTDomain of CVUT_DOMAINS) {
+    CVUTDomain = CVUTDomain.replace(matchOperatorsRegex, '\\$&');
+    CVUTHostREs.push(new RegExp(`(^|\\.)${CVUTDomain}$`));
   }
   for (let githubDomain of GITHUB_DOMAINS) {
     githubDomain = githubDomain.replace(matchOperatorsRegex, '\\$&');
@@ -167,8 +161,8 @@ async function loadExtensionSettings () {
   }
 }
 
-async function clearMicrosoftCookies () {
-  // Clear all microsoft cookies
+async function clearCVUTCookies () {
+  // Clear all ČVUT cookies
   const containers = await browser.contextualIdentities.query({});
   containers.push({
     cookieStoreId: "firefox-default"
@@ -176,39 +170,39 @@ async function clearMicrosoftCookies () {
 
   let macAssignments = [];
   if (macAddonEnabled) {
-    const promises = MICROSOFT_DOMAINS.map(async microsoftDomain => {
-      const assigned = await getMACAssignment(`https://${microsoftDomain}/`);
-      return assigned ? microsoftDomain : null;
+    const promises = CVUT_DOMAINS.map(async CVUTDomain => {
+      const assigned = await getMACAssignment(`https://${CVUTDomain}/`);
+      return assigned ? CVUTDomain : null;
     });
     macAssignments = await Promise.all(promises);
   }
 
-  MICROSOFT_DOMAINS.map(async microsoftDomain => {
-    const microsoftCookieUrl = `https://${microsoftDomain}/`;
+  CVUT_DOMAINS.map(async CVUTDomain => {
+    const CVUTCookieUrl = `https://${CVUTDomain}/`;
 
-    // dont clear cookies for microsoftDomain if mac assigned (with or without www.)
+    // dont clear cookies for CVUTDomain if mac assigned (with or without www.)
     if (macAddonEnabled &&
-        (macAssignments.includes(microsoftDomain) ||
-         macAssignments.includes(`www.${microsoftDomain}`))) {
+        (macAssignments.includes(CVUTDomain) ||
+         macAssignments.includes(`www.${CVUTDomain}`))) {
       return;
     }
 
     containers.map(async container => {
       const storeId = container.cookieStoreId;
-      if (storeId === microsoftCookieStoreId) {
-        // Don't clear cookies in the Microsoft Container
+      if (storeId === CVUTCookieStoreId) {
+        // Don't clear cookies in the ČVUT Container
         return;
       }
 
       const cookies = await browser.cookies.getAll({
-        domain: microsoftDomain,
+        domain: CVUTDomain,
         storeId
       });
 
       cookies.map(cookie => {
         browser.cookies.remove({
           name: cookie.name,
-          url: microsoftCookieUrl,
+          url: CVUTCookieUrl,
           storeId
         });
       });
@@ -217,17 +211,17 @@ async function clearMicrosoftCookies () {
 }
 
 async function setupContainer () {
-  // Use existing Microsoft container, or create one
-  const contexts = await browser.contextualIdentities.query({name: MICROSOFT_CONTAINER_NAME});
+  // Use existing ČVUT container, or create one
+  const contexts = await browser.contextualIdentities.query({name: CVUT_CONTAINER_NAME});
   if (contexts.length > 0) {
-    microsoftCookieStoreId = contexts[0].cookieStoreId;
+    CVUTCookieStoreId = contexts[0].cookieStoreId;
   } else {
     const context = await browser.contextualIdentities.create({
-      name: MICROSOFT_CONTAINER_NAME,
-      color: MICROSOFT_CONTAINER_COLOR,
-      icon: MICROSOFT_CONTAINER_ICON
+      name: CVUT_CONTAINER_NAME,
+      color: CVUT_CONTAINER_COLOR,
+      icon: CVUT_CONTAINER_ICON
     });
-    microsoftCookieStoreId = context.cookieStoreId;
+    CVUTCookieStoreId = context.cookieStoreId;
   }
 }
 
@@ -242,10 +236,10 @@ function reopenTab ({url, tab, cookieStoreId}) {
   browser.tabs.remove(tab.id);
 }
 
-function isMicrosoftURL (url) {
+function isCVUTURL (url) {
   const parsedUrl = new URL(url);
-  for (let microsoftHostRE of microsoftHostREs) {
-    if (microsoftHostRE.test(parsedUrl.hostname)) {
+  for (let CVUTHostRE of CVUTHostREs) {
+    if (CVUTHostRE.test(parsedUrl.hostname)) {
       return true;
     }
   }
@@ -290,7 +284,7 @@ function shouldContainInto (url, tab) {
     return false;
   }
 
-  let handleUrl = isMicrosoftURL(url) || (extensionSettings.allowlist.length!=0 && isAllowlistedURL(url));
+  let handleUrl = isCVUTURL(url) || (extensionSettings.allowlist.length!=0 && isAllowlistedURL(url));
 
   if (handleUrl && extensionSettings.whitelist.length!=0 && isWhitelistedURL(url)) {
     handleUrl = false;
@@ -301,18 +295,18 @@ function shouldContainInto (url, tab) {
   }
 
   if (handleUrl) {
-    if (tab.cookieStoreId !== microsoftCookieStoreId) {
+    if (tab.cookieStoreId !== CVUTCookieStoreId) {
       if (tab.cookieStoreId !== "firefox-default" && extensionSettings.dont_override_containers) {
         // Tab is already in a container, the user doesn't want us to override containers
         return false;
       }
 
-      // Microsoft-URL outside of Microsoft Container Tab
-      // Should contain into Microsoft Container
-      return microsoftCookieStoreId;
+      // CVUT-URL outside of ČVUT Container Tab
+      // Should contain into ČVUT Container
+      return CVUTCookieStoreId;
     }
-  } else if (tab.cookieStoreId === microsoftCookieStoreId) {
-    // Non-Microsoft-URL inside Microsoft Container Tab
+  } else if (tab.cookieStoreId === CVUTCookieStoreId) {
+    // Non-CVUT-URL inside CVUT Container Tab
     // Should contain into Default Container
     return "firefox-default";
   }
@@ -382,8 +376,8 @@ async function maybeReopenAlreadyOpenTabs () {
   });
 }
 
-async function containMicrosoft (options) {
-  // Listen to requests and open Microsoft into its Container,
+async function containCVUT (options) {
+  // Listen to requests and open CVUT into its Container,
   // open other sites into the default tab context
   if (options.tabId === -1) {
     // Request doesn't belong to a tab
@@ -436,14 +430,14 @@ async function containMicrosoft (options) {
   } catch (error) {
     // TODO: Needs backup strategy
     // See https://github.com/mozilla/contain-facebook/issues/23
-    // Sometimes this add-on is installed but doesn't get a microsoftCookieStoreId ?
+    // Sometimes this add-on is installed but doesn't get a CVUTCookieStoreId ?
     // eslint-disable-next-line no-console
     console.log(error);
     return;
   }
   loadExtensionSettings();
-  clearMicrosoftCookies();
-  generateMicrosoftHostREs();
+  clearCVUTCookies();
+  generateCVUTHostREs();
 
   // Clean up canceled requests
   browser.webRequest.onCompleted.addListener((options) => {
@@ -458,7 +452,7 @@ async function containMicrosoft (options) {
   },{urls: ["<all_urls>"], types: ["main_frame"]});
 
   // Add the request listener
-  browser.webRequest.onBeforeRequest.addListener(containMicrosoft, {urls: ["<all_urls>"], types: ["main_frame"]}, ["blocking"]);
+  browser.webRequest.onBeforeRequest.addListener(containCVUT, {urls: ["<all_urls>"], types: ["main_frame"]}, ["blocking"]);
 
   maybeReopenAlreadyOpenTabs();
 })();

@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "Better Microsoft Container",
-    "version": "1.0.1",
+    "name": "ČVUT Container",
+    "version": "1.0.0",
 
-    "description": "Better Microsoft Container isolates your Microsoft activity from the rest of your web activity in order to prevent Microsoft from tracking you outside of the Microsoft website via third party cookies. It is fork of old outdated Microsoft Container",
+    "description": "ČVUT Container isolates your ČVUT activity from the rest of your web activity.",
 
     "icons": {
         "48": "icon.png",
@@ -12,12 +12,12 @@
 
     "applications": {
       "gecko": {
-        "id": "@better-contain-microsoft",
+        "id": "@better-contain-cvut",
         "strict_min_version": "57.0"
       }
     },
 
-    "homepage_url": "https://git.envs.net/fkomarek/better-contain-microsoft",
+    "homepage_url": "https://github.com/filip2cz/contain-cvut/",
 
     "permissions": [
         "<all_urls>",
