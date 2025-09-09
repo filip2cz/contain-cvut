@@ -4,7 +4,7 @@ const CVUT_CONTAINER_COLOR = "purple";
 const CVUT_CONTAINER_ICON = "fingerprint";
 
 let CVUT_DOMAINS = [
-  "hub.fel.cvut.cz", "auth.fel.cvut.cz", "kos.cvut.cz", "moodle.fel.cvut.cz"
+  "hub.fel.cvut.cz", "auth.fel.cvut.cz", "kos.cvut.cz", "moodle.fel.cvut.cz", "usermap.cvut.cz"
 ];
 
 const GITHUB_DOMAINS = [
